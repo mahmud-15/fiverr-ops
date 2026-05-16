@@ -4,10 +4,9 @@ import { jwtVerify } from "jose"
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-dev-secret-32chars!!")
 const COOKIE_NAME = "fiverr-ops-session"
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow public paths
   if (
     pathname.startsWith("/login") ||
     pathname.startsWith("/api/auth") ||
@@ -16,7 +15,6 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Allow static assets
   if (pathname.startsWith("/_next") || pathname.includes(".")) {
     return NextResponse.next()
   }
