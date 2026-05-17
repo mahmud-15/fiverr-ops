@@ -1,0 +1,255 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/auth/login",
+      "regex": "^/api/auth/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/login(?:/)?$"
+    },
+    {
+      "page": "/api/auth/logout",
+      "regex": "^/api/auth/logout(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/logout(?:/)?$"
+    },
+    {
+      "page": "/api/brief/analyze",
+      "regex": "^/api/brief/analyze(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/brief/analyze(?:/)?$"
+    },
+    {
+      "page": "/api/compliance/check",
+      "regex": "^/api/compliance/check(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/compliance/check(?:/)?$"
+    },
+    {
+      "page": "/api/compliance/history",
+      "regex": "^/api/compliance/history(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/compliance/history(?:/)?$"
+    },
+    {
+      "page": "/api/compliance/rules",
+      "regex": "^/api/compliance/rules(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/compliance/rules(?:/)?$"
+    },
+    {
+      "page": "/api/feed",
+      "regex": "^/api/feed(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/feed(?:/)?$"
+    },
+    {
+      "page": "/api/feed/refresh",
+      "regex": "^/api/feed/refresh(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/feed/refresh(?:/)?$"
+    },
+    {
+      "page": "/api/fiverr-updates",
+      "regex": "^/api/fiverr\\-updates(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/fiverr\\-updates(?:/)?$"
+    },
+    {
+      "page": "/api/fiverr-updates/refresh",
+      "regex": "^/api/fiverr\\-updates/refresh(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/fiverr\\-updates/refresh(?:/)?$"
+    },
+    {
+      "page": "/api/knowledge-base",
+      "regex": "^/api/knowledge\\-base(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/knowledge\\-base(?:/)?$"
+    },
+    {
+      "page": "/api/knowledge-base/learn-policies",
+      "regex": "^/api/knowledge\\-base/learn\\-policies(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/knowledge\\-base/learn\\-policies(?:/)?$"
+    },
+    {
+      "page": "/api/knowledge-base/search",
+      "regex": "^/api/knowledge\\-base/search(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/knowledge\\-base/search(?:/)?$"
+    },
+    {
+      "page": "/api/knowledge-base/upload",
+      "regex": "^/api/knowledge\\-base/upload(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/knowledge\\-base/upload(?:/)?$"
+    },
+    {
+      "page": "/api/profile/audit",
+      "regex": "^/api/profile/audit(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/profile/audit(?:/)?$"
+    },
+    {
+      "page": "/api/profile/history",
+      "regex": "^/api/profile/history(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/profile/history(?:/)?$"
+    },
+    {
+      "page": "/api/projects",
+      "regex": "^/api/projects(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/projects(?:/)?$"
+    },
+    {
+      "page": "/api/sheets/init",
+      "regex": "^/api/sheets/init(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/sheets/init(?:/)?$"
+    },
+    {
+      "page": "/api/templates",
+      "regex": "^/api/templates(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/templates(?:/)?$"
+    },
+    {
+      "page": "/api/upload",
+      "regex": "^/api/upload(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/upload(?:/)?$"
+    },
+    {
+      "page": "/api/weather",
+      "regex": "^/api/weather(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/weather(?:/)?$"
+    },
+    {
+      "page": "/brief-analyzer",
+      "regex": "^/brief\\-analyzer(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/brief\\-analyzer(?:/)?$"
+    },
+    {
+      "page": "/compliance",
+      "regex": "^/compliance(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/compliance(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/feed",
+      "regex": "^/feed(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/feed(?:/)?$"
+    },
+    {
+      "page": "/fiverr-updates",
+      "regex": "^/fiverr\\-updates(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/fiverr\\-updates(?:/)?$"
+    },
+    {
+      "page": "/knowledge-base",
+      "regex": "^/knowledge\\-base(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/knowledge\\-base(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/profile-auditor",
+      "regex": "^/profile\\-auditor(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/profile\\-auditor(?:/)?$"
+    },
+    {
+      "page": "/projects",
+      "regex": "^/projects(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/projects(?:/)?$"
+    },
+    {
+      "page": "/settings",
+      "regex": "^/settings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/settings(?:/)?$"
+    },
+    {
+      "page": "/templates",
+      "regex": "^/templates(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/templates(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

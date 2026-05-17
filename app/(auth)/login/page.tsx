@@ -1,24 +1,43 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Zap, Loader2, AlertCircle, Eye, EyeOff } from "lucide-react"
+import { Zap, Loader2, AlertCircle, Eye, EyeOff, Wifi } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function LoginPage() {
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [loadingMsg, setLoadingMsg] = useState("Signing in...")
   const [error, setError] = useState<string | null>(null)
+  const [warming, setWarming] = useState(true)
   const router = useRouter()
+
+  // Warm up the server function as soon as page loads
+  useEffect(() => {
+    fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: "__warmup__" }),
+    })
+      .catch(() => {})
+      .finally(() => setWarming(false))
+  }, [])
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError(null)
+    setLoadingMsg("Signing in...")
+
+    // Show encouraging message if it takes longer than 2s
+    const msgTimer = setTimeout(() => {
+      setLoadingMsg("Almost there...")
+    }, 2000)
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -27,6 +46,8 @@ export default function LoginPage() {
         body: JSON.stringify({ password }),
       })
 
+      clearTimeout(msgTimer)
+
       if (!res.ok) {
         const data = await res.json()
         setError(data.error || "Invalid password")
@@ -34,10 +55,12 @@ export default function LoginPage() {
         return
       }
 
+      setLoadingMsg("Loading dashboard...")
       router.push("/")
       router.refresh()
     } catch {
-      setError("Something went wrong. Please try again.")
+      clearTimeout(msgTimer)
+      setError("Connection error. Please try again.")
       setLoading(false)
     }
   }
@@ -76,6 +99,14 @@ export default function LoginPage() {
           </div>
         </div>
 
+        {/* Warming up notice */}
+        {warming && (
+          <div className="flex items-center gap-2 rounded-lg bg-primary/10 border border-primary/20 px-3 py-2.5 mb-4">
+            <Wifi className="h-4 w-4 text-primary animate-pulse shrink-0" />
+            <p className="text-xs text-primary">Connecting to server...</p>
+          </div>
+        )}
+
         <form onSubmit={handleLogin} className="space-y-5">
           <div className="space-y-2">
             <Label htmlFor="password" className="text-sm font-medium">Password</Label>
@@ -111,12 +142,17 @@ export default function LoginPage() {
           <Button
             type="submit"
             className="w-full h-11 text-sm font-semibold"
-            disabled={loading}
+            disabled={loading || warming}
           >
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Signing in...
+                {loadingMsg}
+              </>
+            ) : warming ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Connecting...
               </>
             ) : (
               "Sign In"
@@ -126,7 +162,7 @@ export default function LoginPage() {
 
         <div className="mt-6 rounded-xl bg-secondary/40 border border-border/50 p-3">
           <p className="text-xs text-muted-foreground text-center">
-            Personal tool for Mahmud. Single-user access only.
+            Personal tool for Mahmud · Single-user access only
           </p>
         </div>
       </div>

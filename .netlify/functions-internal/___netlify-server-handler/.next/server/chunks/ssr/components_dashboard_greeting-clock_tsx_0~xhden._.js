@@ -1,0 +1,3 @@
+module.exports=[97395,a=>{"use strict";var b=a.i(87924),c=a.i(72131);a.s(["GreetingClock",0,function(){let[a,d]=(0,c.useState)("Welcome back");return(0,c.useEffect)(()=>{function a(){var a;d((a=new Date().getHours())>=5&&a<12?"Good morning":a>=12&&a<17?"Good afternoon":a>=17&&a<21?"Good evening":"Good night")}a();let b=setInterval(a,6e4);return()=>clearInterval(b)},[]),(0,b.jsxs)("span",{suppressHydrationWarning:!0,children:[a,", Mahmud"]})}])}];
+
+//# sourceMappingURL=components_dashboard_greeting-clock_tsx_0~xhden._.js.map
