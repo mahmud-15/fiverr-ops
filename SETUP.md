@@ -1,11 +1,11 @@
-# FiverrOps Setup Guide
+# Syndio Setup Guide
 
 ## 1. Google Sheets Setup
 
 ### Create the Spreadsheet
 1. Go to sheets.google.com
 2. Create a new blank spreadsheet
-3. Name it "FiverrOps Database"
+3. Name it "Syndio Database"
 4. Copy the spreadsheet ID from the URL:
    `https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID_HERE/edit`
 

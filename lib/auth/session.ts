@@ -2,7 +2,7 @@ import { SignJWT, jwtVerify } from "jose"
 import { cookies } from "next/headers"
 
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-dev-secret-32chars!!")
-const COOKIE_NAME = "fiverr-ops-session"
+const COOKIE_NAME = "syndio-session"
 
 export async function createSession() {
   const token = await new SignJWT({ authenticated: true })

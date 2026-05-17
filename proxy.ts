@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server"
 import { jwtVerify } from "jose"
 
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-dev-secret-32chars!!")
-const COOKIE_NAME = "fiverr-ops-session"
+const COOKIE_NAME = "syndio-session"
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (

@@ -20,9 +20,13 @@ interface Article {
 
 const categoryColors: Record<string, string> = {
   "Policies": "bg-red-500/10 text-red-400 border-red-500/20",
+  "Policy": "bg-red-500/10 text-red-400 border-red-500/20",
   "SOPs": "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  "Pricing": "bg-green-500/10 text-green-400 border-green-500/20",
-  "Lessons Learned": "bg-purple-500/10 text-purple-400 border-purple-500/20",
+  "Pricing": "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  "Lessons Learned": "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+  "Quotation": "bg-green-500/10 text-green-400 border-green-500/20",
+  "Conversation": "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  "Reference": "bg-purple-500/10 text-purple-400 border-purple-500/20",
 }
 
 interface KbArticleProps {

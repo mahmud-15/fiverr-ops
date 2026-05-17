@@ -78,7 +78,7 @@ async function fetchRedditFiverr(): Promise<RawFeedItem[]> {
       "https://www.reddit.com/r/fiverr/hot.json?limit=25",
       {
         headers: {
-          "User-Agent": "FiverrOps/1.0 (personal tool)",
+          "User-Agent": "Syndio/1.0 (personal tool)",
         },
         signal: AbortSignal.timeout(8000),
       }

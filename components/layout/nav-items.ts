@@ -3,6 +3,7 @@ import {
   ShieldCheck,
   BarChart2,
   Rss,
+  TrendingUp,
   FileSearch,
   Library,
   BookOpen,
@@ -30,6 +31,11 @@ export const navItems = [
     title: "Intelligence Feed",
     href: "/feed",
     icon: Rss,
+  },
+  {
+    title: "Fiverr Updates",
+    href: "/fiverr-updates",
+    icon: TrendingUp,
   },
   {
     title: "Brief Analyzer",

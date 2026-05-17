@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tell Tailwind v4 to use .dark class for dark mode */
+@custom-variant dark (&:is(.dark *));
+
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -20,40 +23,186 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  --color-sidebar: hsl(var(--sidebar, var(--card)));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* ─── Light mode ─────────────────────────────────────────── */
 :root {
-  --background: 224 71.4% 4.1%;
-  --foreground: 210 20% 98%;
-  --card: 220 40% 8%;
-  --card-foreground: 210 20% 98%;
-  --popover: 220 40% 8%;
-  --popover-foreground: 210 20% 98%;
-  --primary: 263.4 70% 50.4%;
-  --primary-foreground: 210 20% 98%;
-  --secondary: 215 27.9% 16.9%;
-  --secondary-foreground: 210 20% 98%;
-  --muted: 215 27.9% 16.9%;
-  --muted-foreground: 217.9 10.6% 64.9%;
-  --accent: 215 27.9% 16.9%;
-  --accent-foreground: 210 20% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 20% 98%;
-  --border: 215 27.9% 16.9%;
-  --input: 215 27.9% 16.9%;
-  --ring: 263.4 70% 50.4%;
+  --background: 220 25% 97%;
+  --foreground: 222 47% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 10%;
+  --primary: 263 70% 52%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 20% 94%;
+  --secondary-foreground: 222 47% 20%;
+  --muted: 220 20% 94%;
+  --muted-foreground: 220 15% 42%;
+  --accent: 220 20% 90%;
+  --accent-foreground: 222 47% 10%;
+  --destructive: 0 84% 58%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 20% 88%;
+  --input: 220 20% 92%;
+  --ring: 263 70% 52%;
   --radius: 0.5rem;
-  --success: 142 76% 36%;
-  --warning: 38 92% 50%;
+  --success: 142 72% 34%;
+  --warning: 38 92% 48%;
+  --sidebar: 0 0% 100%;
+}
+
+/* ─── Dark mode ──────────────────────────────────────────── */
+.dark {
+  --background: 222 47% 5%;
+  --foreground: 210 30% 96%;
+  --card: 222 40% 9%;
+  --card-foreground: 210 30% 96%;
+  --popover: 222 40% 9%;
+  --popover-foreground: 210 30% 96%;
+  --primary: 263 70% 58%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 222 35% 14%;
+  --secondary-foreground: 210 25% 88%;
+  --muted: 222 35% 14%;
+  --muted-foreground: 218 20% 72%;
+  --accent: 222 35% 18%;
+  --accent-foreground: 210 30% 95%;
+  --destructive: 0 65% 48%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 222 30% 18%;
+  --input: 222 35% 13%;
+  --ring: 263 70% 58%;
+  --radius: 0.5rem;
+  --success: 142 76% 42%;
+  --warning: 38 92% 52%;
+  --sidebar: 222 42% 7%;
 }
 
 * {
   border-color: hsl(var(--border));
 }
 
+/* ─── Light mode polish ──────────────────────────────────── */
+:root .rounded-xl,
+:root .rounded-2xl,
+:root [class*="Card"] {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+}
+
+/* ─── Dark mode polish ───────────────────────────────────── */
+.dark .rounded-xl,
+.dark .rounded-2xl {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3);
+}
+
+/* Hide Next.js dev overlay indicator button */
+nextjs-portal {
+  display: none !important;
+}
+
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.animate-fade-in-up   { animation: fadeInUp 0.4s ease forwards; }
+.animate-fade-in      { animation: fadeIn 0.3s ease forwards; }
+.animate-slide-in-left { animation: slideInLeft 0.35s ease forwards; }
+.animate-scale-in     { animation: scaleIn 0.3s ease forwards; }
+.animate-float        { animation: float 3s ease-in-out infinite; }
+.animate-pulse-dot    { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-gradient     {
+  background-size: 200% auto;
+  animation: gradient-x 3s linear infinite;
+}
+
+/* Stagger delays */
+.delay-75  { animation-delay: 75ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Glass effect */
+.glass {
+  background: hsl(var(--card) / 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)), #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer button effect */
+.shimmer-btn {
+  background: linear-gradient(90deg, transparent 0%, hsl(var(--primary-foreground) / 0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+}
+.shimmer-btn:hover { animation: shimmer 1.2s ease infinite; }
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px hsl(var(--primary) / 0.1);
+}
+
+/* Glow effect */
+.glow-primary {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.25);
 }

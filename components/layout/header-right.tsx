@@ -34,9 +34,9 @@ export function HeaderRight() {
   if (!now) return null
 
   return (
-    <div className="leading-tight text-sm text-right">
-      <p className="text-foreground font-medium tabular-nums">{now.time}</p>
-      <p className="text-xs text-muted-foreground">{now.date}</p>
+    <div className="leading-tight text-sm text-right" suppressHydrationWarning>
+      <p className="text-foreground font-medium tabular-nums" suppressHydrationWarning>{now.time}</p>
+      <p className="hidden sm:block text-xs text-muted-foreground" suppressHydrationWarning>{now.date}</p>
     </div>
   )
 }

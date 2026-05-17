@@ -175,7 +175,7 @@ export function ProjectList() {
         </div>
       ) : (
         /* Kanban view */
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {statusColumns.map((col) => (
             <div key={col.key} className="space-y-3">
               <div className="flex items-center gap-2">
@@ -199,12 +199,12 @@ export function ProjectList() {
 
       {/* Add dialog */}
       <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
-        <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-lg w-full mx-2 sm:mx-auto max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Add New Project</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Buyer Name *</Label>
                 <Input
@@ -237,7 +237,7 @@ export function ProjectList() {
                 className="bg-background"
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Budget ($)</Label>
                 <Input
@@ -267,7 +267,7 @@ export function ProjectList() {
                 className="min-h-[100px] bg-background"
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Order ID</Label>
                 <Input

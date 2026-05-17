@@ -137,7 +137,7 @@ export function ProjectCard({ project, onUpdate, onDelete }: ProjectCardProps) {
       </Card>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg w-full mx-2 sm:mx-auto">
           <DialogHeader>
             <DialogTitle>{project.title}</DialogTitle>
           </DialogHeader>

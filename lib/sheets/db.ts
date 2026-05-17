@@ -92,6 +92,18 @@ export interface ComplianceRule {
   is_regex: boolean
 }
 
+export interface FiverrUpdate {
+  id: string
+  created_at: string
+  date: string        // YYYY-MM-DD
+  type: "news" | "seller_tip" | "profile_tip"
+  title: string
+  content: string
+  source?: string
+  urgency: "urgent" | "normal" | "low"
+  tags: string[]
+}
+
 // Sheet names (tabs in the spreadsheet)
 export const SHEETS = {
   COMPLIANCE_CHECKS: "compliance_checks",
@@ -102,6 +114,7 @@ export const SHEETS = {
   PROJECTS: "projects",
   BRIEF_ANALYSES: "brief_analyses",
   COMPLIANCE_RULES: "compliance_rules",
+  FIVERR_UPDATES: "fiverr_updates",
 } as const
 
 // Column definitions for each sheet (order matters - matches spreadsheet columns)
@@ -114,6 +127,7 @@ export const COLUMNS: Record<string, string[]> = {
   projects: ["id", "created_at", "updated_at", "buyer_name", "title", "status", "budget", "deadline", "description", "notes", "order_id", "platform_link", "tags"],
   brief_analyses: ["id", "created_at", "original_brief", "analysis"],
   compliance_rules: ["id", "created_at", "type", "pattern", "severity", "suggestion", "policy_ref", "is_enabled", "is_regex"],
+  fiverr_updates: ["id", "created_at", "date", "type", "title", "content", "source", "urgency", "tags"],
 }
 
 // JSON fields that need serialization/deserialization
@@ -362,4 +376,27 @@ export const complianceRules = {
   insert: (data: Partial<ComplianceRule>) => insert(SHEETS.COMPLIANCE_RULES, data as Record<string, unknown>) as unknown as Promise<ComplianceRule>,
   update: (id: string, updates: Partial<ComplianceRule>) => update(SHEETS.COMPLIANCE_RULES, id, updates as Record<string, unknown>) as unknown as Promise<ComplianceRule | null>,
   delete: (id: string) => deleteRow(SHEETS.COMPLIANCE_RULES, id),
+}
+
+// Fiverr updates
+export const fiverrUpdates = {
+  getAll: () => getAllRows(SHEETS.FIVERR_UPDATES) as unknown as Promise<FiverrUpdate[]>,
+  getByDate: async (date: string) => {
+    const all = await getAllRows(SHEETS.FIVERR_UPDATES) as unknown as FiverrUpdate[]
+    return all.filter((u) => u.date === date)
+  },
+  getToday: async () => {
+    const today = new Date().toISOString().split("T")[0]
+    const all = await getAllRows(SHEETS.FIVERR_UPDATES) as unknown as FiverrUpdate[]
+    return all.filter((u) => u.date === today)
+  },
+  insert: (data: Partial<FiverrUpdate>) => insert(SHEETS.FIVERR_UPDATES, data as Record<string, unknown>) as unknown as Promise<FiverrUpdate>,
+  bulkInsert: async (items: Partial<FiverrUpdate>[]) => {
+    for (const item of items) await insert(SHEETS.FIVERR_UPDATES, item as Record<string, unknown>)
+  },
+  clearDate: async (date: string) => {
+    const all = await getAllRows(SHEETS.FIVERR_UPDATES) as unknown as FiverrUpdate[]
+    const toDelete = all.filter((u) => u.date === date)
+    for (const item of toDelete) await deleteRow(SHEETS.FIVERR_UPDATES, item.id)
+  },
 }

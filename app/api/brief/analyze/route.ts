@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { briefAnalyses } from "@/lib/sheets/db"
+import { briefAnalyses, kbArticles } from "@/lib/sheets/db"
 import { analyzeBrief } from "@/lib/ai/brief-analyzer"
 
 export const maxDuration = 60
@@ -13,7 +13,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Brief text is required" }, { status: 400 })
     }
 
-    const analysis = await analyzeBrief(briefText)
+    // Fetch relevant KB articles for context
+    const allArticles = await kbArticles.getAll()
+    const pricingArticles = allArticles.filter(
+      (a) => a.category === "Pricing" || a.category === "Quotation"
+    )
+    const kbContext = pricingArticles
+      .slice(0, 5)
+      .map((a) => `**${a.title}**\n${String(a.content).slice(0, 500)}`)
+      .join("\n\n---\n\n")
+
+    const analysis = await analyzeBrief(briefText, kbContext || undefined)
 
     // Save to database
     const saved = await briefAnalyses.insert({
@@ -25,6 +35,7 @@ export async function POST(request: NextRequest) {
       id: saved?.id,
       analysis,
       timestamp: new Date().toISOString(),
+      kbArticlesUsed: pricingArticles.length,
     })
   } catch (error) {
     console.error("Brief analysis error:", error)

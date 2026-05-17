@@ -12,7 +12,8 @@ export async function GET(request: NextRequest) {
 
     // Filter by category
     if (category && category !== "all") {
-      all = all.filter((item) => item.category === category)
+      const cat = category.toLowerCase().trim()
+      all = all.filter((item) => String(item.category || "").toLowerCase().trim() === cat)
     }
 
     // Sort by published_at desc, then created_at desc

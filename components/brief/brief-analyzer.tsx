@@ -236,7 +236,7 @@ export function BriefAnalyzer() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="grid grid-cols-3 gap-4 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
                 <div className="rounded-lg bg-secondary/30 p-3">
                   <p className="text-xs text-muted-foreground mb-1">Minimum</p>
                   <p className="text-xl font-bold">${analysis.suggestedPriceRange.min}</p>

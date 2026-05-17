@@ -99,83 +99,98 @@ const quickActions = [
   { title: "Projects", href: "/projects", icon: FolderKanban, color: "text-yellow-400", bg: "bg-yellow-400/10" },
 ]
 
+const statCards = [
+  {
+    title: "Total Checks",
+    icon: ShieldCheck,
+    iconColor: "text-blue-400",
+    iconBg: "bg-blue-400/10",
+    delay: "delay-75",
+  },
+  {
+    title: "Profile Score",
+    icon: BarChart2,
+    iconColor: "text-purple-400",
+    iconBg: "bg-purple-400/10",
+    delay: "delay-150",
+  },
+  {
+    title: "Feed Today",
+    icon: Rss,
+    iconColor: "text-green-400",
+    iconBg: "bg-green-400/10",
+    delay: "delay-200",
+  },
+  {
+    title: "Active Projects",
+    icon: FolderKanban,
+    iconColor: "text-yellow-400",
+    iconBg: "bg-yellow-400/10",
+    delay: "delay-300",
+  },
+]
+
 export default async function DashboardPage() {
   const stats = await getDashboardStats()
 
+  const statValues = [
+    { value: stats.checksCount, sub: "Compliance checks run" },
+    {
+      value: stats.latestScore !== null ? `${stats.latestScore}` : "—",
+      sub: stats.latestScore !== null ? "Latest audit score" : "No audit yet",
+    },
+    { value: stats.feedCount, sub: "New items in last 24h" },
+    { value: stats.projectsCount, sub: "In progress" },
+  ]
+
   return (
-    <div className="space-y-6 p-6">
+    <div className="animate-fade-in space-y-4 sm:space-y-6 p-4 sm:p-6">
       {/* Welcome header */}
       <div>
-        <h1 className="text-3xl font-bold text-foreground">
+        <h1 className="text-2xl sm:text-3xl font-bold gradient-text">
           <GreetingClock />
         </h1>
-        <p className="text-muted-foreground mt-1">Here&apos;s your Fiverr operations overview</p>
+        <p className="text-muted-foreground mt-1 text-sm sm:text-base">
+          Here&apos;s your Fiverr operations overview
+        </p>
       </div>
 
       {/* Stats cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Checks</CardTitle>
-            <ShieldCheck className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">{stats.checksCount}</p>
-            <p className="text-xs text-muted-foreground mt-1">Compliance checks run</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Profile Score</CardTitle>
-            <BarChart2 className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">
-              {stats.latestScore !== null ? `${stats.latestScore}` : "—"}
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">
-              {stats.latestScore !== null ? "Latest audit score" : "No audit yet"}
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Feed Today</CardTitle>
-            <Rss className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">{stats.feedCount}</p>
-            <p className="text-xs text-muted-foreground mt-1">New items in last 24h</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Active Projects</CardTitle>
-            <FolderKanban className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">{stats.projectsCount}</p>
-            <p className="text-xs text-muted-foreground mt-1">In progress</p>
-          </CardContent>
-        </Card>
+        {statCards.map((s, i) => {
+          const Icon = s.icon
+          const sv = statValues[i]
+          return (
+            <Card key={s.title} className={`card-hover animate-fade-in-up opacity-0 ${s.delay}`}>
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">{s.title}</CardTitle>
+                <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${s.iconBg}`}>
+                  <Icon className={`h-4 w-4 ${s.iconColor}`} />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-3xl font-bold">{sv.value}</p>
+                <p className="text-xs text-muted-foreground mt-1">{sv.sub}</p>
+              </CardContent>
+            </Card>
+          )
+        })}
       </div>
 
       {/* Quick actions */}
-      <Card>
+      <Card className="animate-fade-in-up opacity-0 delay-300">
         <CardHeader>
           <CardTitle className="text-base">Quick Actions</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
-            {quickActions.map((action) => {
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+            {quickActions.map((action, i) => {
               const Icon = action.icon
+              const delayClass = ["delay-75","delay-100","delay-150","delay-200","delay-300","delay-400","delay-500"][i] ?? ""
               return (
                 <Link key={action.href} href={action.href}>
-                  <div className={`flex flex-col items-center gap-2 rounded-lg p-3 ${action.bg} hover:opacity-80 transition-opacity cursor-pointer`}>
-                    <Icon className={`h-5 w-5 ${action.color}`} />
+                  <div className={`card-hover animate-fade-in-up opacity-0 ${delayClass} flex flex-col items-center gap-2.5 rounded-xl p-3.5 ${action.bg} hover:opacity-90 transition-opacity cursor-pointer`}>
+                    <Icon className={`h-6 w-6 ${action.color}`} />
                     <span className="text-xs text-center font-medium text-foreground leading-tight">{action.title}</span>
                   </div>
                 </Link>
@@ -188,7 +203,7 @@ export default async function DashboardPage() {
       {/* Recent activity */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Recent compliance checks */}
-        <Card>
+        <Card className="card-hover animate-fade-in-up opacity-0 delay-400">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-base">Recent Compliance Checks</CardTitle>
             <Button variant="ghost" size="sm" asChild>
@@ -206,7 +221,7 @@ export default async function DashboardPage() {
                   <div className="flex items-center gap-2">
                     {getVerdictIcon(check.verdict)}
                     <div>
-                      <p className="text-sm font-medium">{getVerdictBadge(check.verdict)}</p>
+                      <div className="text-sm font-medium">{getVerdictBadge(check.verdict)}</div>
                       <p className="text-xs text-muted-foreground">
                         {check.issues_count} issue{check.issues_count !== 1 ? "s" : ""} found
                       </p>
@@ -223,7 +238,7 @@ export default async function DashboardPage() {
         </Card>
 
         {/* Active projects */}
-        <Card>
+        <Card className="card-hover animate-fade-in-up opacity-0 delay-500">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-base">Active Projects</CardTitle>
             <Button variant="ghost" size="sm" asChild>

@@ -20,6 +20,8 @@ export interface Deliverable { item: string; format?: string; isExplicit: boolea
 
 const SYSTEM_PROMPT = `You are an expert Fiverr freelancer analyst specializing in project scoping and client communication. Analyze client project briefs to help freelancers understand requirements, identify risks, and price accurately.
 
+You have access to a knowledge base with past quotations, conversations, and pricing data. Use this to inform your analysis with real-world pricing and timeline estimates.
+
 Return a comprehensive analysis as valid JSON:
 {
   "requirements": [{ "item": "string", "category": "Design|Development|Content|Research|Other", "isExplicit": boolean }],
@@ -35,13 +37,15 @@ Return a comprehensive analysis as valid JSON:
 Be practical and specific. Price ranges should reflect real Fiverr market rates.
 Return ONLY valid JSON, no markdown.`
 
-export async function analyzeBrief(briefText: string): Promise<BriefAnalysis> {
+export async function analyzeBrief(briefText: string, kbContext?: string): Promise<BriefAnalysis> {
+  const userMessage = `${kbContext ? `\n\n**Knowledge Base Context (past projects & pricing):**\n${kbContext}\n\n` : ""}Analyze this client brief:\n\n${briefText.slice(0, 5000)}`
+
   const response = await ai.chat.completions.create({
     model: MODELS.smart,
     max_tokens: 3000,
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
-      { role: "user", content: `Analyze this client brief:\n\n${briefText.slice(0, 5000)}` },
+      { role: "user", content: userMessage },
     ],
   })
 

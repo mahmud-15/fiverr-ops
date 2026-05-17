@@ -10,7 +10,9 @@ export async function GET(request: NextRequest) {
     let all = await templates.getAll()
 
     if (scenario && scenario !== "all") {
-      all = all.filter((t) => t.scenario === scenario)
+      // Match both snake_case and Title Case scenarios
+      const normalise = (s: string) => s.toLowerCase().replace(/[\s_-]+/g, "_")
+      all = all.filter((t) => normalise(String(t.scenario)) === normalise(scenario))
     }
 
     if (search) {

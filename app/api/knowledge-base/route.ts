@@ -9,7 +9,8 @@ export async function GET(request: NextRequest) {
     let all = await kbArticles.getAll()
 
     if (category && category !== "all") {
-      all = all.filter((a) => a.category === category)
+      const cat = category.toLowerCase().trim()
+      all = all.filter((a) => String(a.category || "").toLowerCase().trim() === cat)
     }
 
     // Sort by created_at descending

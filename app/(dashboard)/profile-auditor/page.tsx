@@ -6,12 +6,18 @@ import { BarChart2, History } from "lucide-react"
 
 export default function ProfileAuditorPage() {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Profile Auditor</h1>
-        <p className="text-muted-foreground mt-1">
-          Get an AI-powered audit of your Fiverr profile with actionable improvement recommendations
-        </p>
+    <div className="animate-fade-in space-y-4 sm:space-y-6 p-4 sm:p-6">
+      {/* Page header */}
+      <div className="flex items-start gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-md glow-primary">
+          <BarChart2 className="h-6 w-6 text-white" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold gradient-text">Profile Auditor</h1>
+          <p className="text-muted-foreground mt-0.5 text-sm">
+            Get an AI-powered audit of your Fiverr profile with actionable improvement recommendations
+          </p>
+        </div>
       </div>
 
       <Tabs defaultValue="audit">

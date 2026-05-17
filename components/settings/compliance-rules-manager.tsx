@@ -261,7 +261,7 @@ export function ComplianceRulesManager() {
 
       {/* Add / Edit dialog */}
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg w-full mx-2 sm:mx-auto">
           <DialogHeader>
             <DialogTitle>{editingRule ? "Edit Rule" : "Add Compliance Rule"}</DialogTitle>
           </DialogHeader>

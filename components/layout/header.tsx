@@ -12,7 +12,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center justify-between border-b border-border bg-background/95 backdrop-blur px-6">
       <h1 className="text-lg font-semibold text-foreground">
-        {currentPage?.title || "FiverrOps"}
+        {currentPage?.title || "Syndio"}
       </h1>
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" className="relative">
