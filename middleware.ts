@@ -4,7 +4,7 @@ import { jwtVerify } from "jose"
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "fallback-dev-secret-32chars!!")
 const COOKIE_NAME = "syndio-session"
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (
